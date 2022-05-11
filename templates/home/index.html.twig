@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block main %}
+    <main>
+        <section id="up" class="banner">
+            <h1>
+
+            </h1>
+            <a href="#down"></a>
+        </section>
+        <section id="down" class="trick-list">
+            <ul>
+                <li class="card">
+                    <img src="" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <a href=""><h2>Trick name</h2></a>
+                        <button>edit</button>
+                        <button>delete</button>
+                    </div>
+                </li>
+            </ul>
+            <button>Load More</button>
+        </section>
+        <a href="#up">!</a>
+    </main>
+{% endblock %}
