@@ -1,0 +1,95 @@
+header #banner {
+    margin-top: 7rem;
+}
+
+section#up.banner {
+    /*background-image: url("https://images.pexels.com/photos/714256/pexels-photo-714256.jpeg?cs=srgb&dl=pexels-denis-linine-714256.jpg&fm=jpg");*/
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    /*height: 50vh;*/
+    margin-bottom:5rem;
+}
+
+/*section#up.banner div {
+    background-color: #c5c5c5;
+    position: absolute;
+    height:100%;
+    width: 100%;
+    opacity: .5;
+}*/
+
+.tricks-list ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+body {
+    background-color:#e8e8e8;
+    color: #090909;
+}
+
+.navbar {
+    background-color:#e8e8e8 !important;
+    color: #090909;
+}
+
+.navbar button {
+    border: 0;
+}
+
+input {
+    color: #090909;
+    padding: 0.7em 1.7em;
+    margin: 1rem;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    transition: all .3s;
+    box-shadow: 1px 1px 6px #c5c5c5 inset,
+    -1px -1px 6px #ffffff inset;
+}
+
+input:hover {
+    border: 1px solid white;
+}
+
+input:focus {
+    box-shadow: 4px 4px 12px #c5c5c5,
+    -4px -4px 12px #ffffff;
+    border: 1px solid white !important;
+}
+
+/* From uiverse.io by @adamgiebl */
+button:not(.navbar button) {
+    color: #090909;
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    transition: all .3s;
+    box-shadow: 6px 6px 12px #c5c5c5,
+    -6px -6px 12px #ffffff;
+}
+
+button:hover {
+    border: 1px solid white !important;
+}
+
+button:active {
+    box-shadow: 4px 4px 12px #c5c5c5,
+    -4px -4px 12px #ffffff !important;
+}
+
+/* From uiverse.io by @adamgiebl */
+.card {
+    /*width: 190px;
+    height: 254px;*/
+    border-radius: 30px;
+    background: #e8e8e8;
+    box-shadow: 15px 15px 30px #c5c5c5,
+    -15px -15px 30px #ffffff;
+    border: 0;
+}
