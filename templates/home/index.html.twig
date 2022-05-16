@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block main %}
+    <main id="home">
+        <section id="up" class="banner">
+            <div></div>
+            <h1 class="text-center fw-lighter my-auto">
+                La 1ère plateforme collaborative de figures ski
+            </h1>
+            <a href="#down"></a>
+        </section>
+        <section id="down" class="trick-list">
+            <ul class="d-flex justify-content-around">
+                <li class="card w-50">
+                    <img src="" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <a href=""><h2>Trick name</h2></a>
+                        <div class="d-flex justify-content-between">
+                        <button>edit</button>
+                        <button>delete</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button>Load More</button>
+        </section>
+        <a href="#up" >!</a>
+    </main>
+{% endblock %}
