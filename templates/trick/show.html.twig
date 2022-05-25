@@ -2,33 +2,46 @@
 
 {% block title %}Trick{% endblock %}
 
-{% block body %}
-    <h1>Trick</h1>
+{% block main %}
+    <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
+        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ trick.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ trick.description }}</td>
-            </tr>
-            <tr>
-                <th>Banner</th>
-                <td>{{ trick.banner }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {{ include('trick/_delete_form.html.twig') }}
+    </div>
+    <section id="up" class="banner my-4" style="background-image: url({{ trick.banner }})">
+        <h1 class="text-center">
+            {{ trick.name }}
+        </h1>
+    </section>
+    <section class="text-center">
+    <ul class="list-inline">
+        <li class="list-inline-item"><img src="" alt="1"></li>
+        <li class="list-inline-item"><img src="" alt="2"></li>
+        <li class="list-inline-item"><img src="" alt="3"></li>
+        <li class="list-inline-item"><img src="" alt="4"></li>
+        <li class="list-inline-item"><img src="" alt="5"></li>
+        <li class="list-inline-item"><img src="" alt="6"></li>
+    </ul>
+    </section>
+    <section class="text-center">
+        <p>{{ trick.description }}</p>
+    </section>
+
+    <section class="text-center">
+        <ul class="list-inline">
+            <li class="list-inline-item">date de création</li>
+            <li class="list-inline-item">groupe</li>
+            <li class="list-inline-item">date de modification</li>
+        </ul>
+    </section>
+
+    <form action="" class="text-center">
+        <label>
+            <input type="text">
+        </label>
+        <button></button>
+    </form>
 
     <a href="{{ path('app_trick_index') }}">back to list</a>
 
-    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-
-    {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}
