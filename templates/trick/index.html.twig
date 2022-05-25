@@ -2,38 +2,42 @@
 
 {% block title %}Trick index{% endblock %}
 
-{% block body %}
-    <h1>Trick index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Banner</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for trick in tricks %}
-            <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.name }}</td>
-                <td>{{ trick.description }}</td>
-                <td>{{ trick.banner }}</td>
-                <td>
-                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_trick_new') }}">Create new</a>
+{% block main %}
+    <main class="container">
+        <section id="up" class="banner my-4">
+            <h1 class="text-center">
+SNOW TRICKS
+            </h1>
+            <a href="#down"></a>
+        </section>
+        <section id="down" class="trick-list my-4">
+            <div class="text-end my-4">
+            <a href="{{ path('app_trick_new') }}">Create new</a>
+            </div>
+            <ul class="d-flex justify-content-between">
+                {% for trick in tricks %}
+                <li class="card">
+                    <img src="{{ trick.banner }}" alt="{{ trick.name }}" class="card-img-top">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <a href="{{ path('app_trick_show', {'id': trick.id}) }}"><h2>{{ trick.name }}</h2></a>
+                        </div>
+                        <div class="ms-4">
+                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">delete</a>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                    <div>
+                <span>no records found</span>
+                    </div>
+                {% endfor %}
+            </ul>
+            <div class="text-center">
+            <button>Load More</button>
+            </div>
+        </section>
+        <a href="#up" class="fixed-bottom display-1 text-end">^</a>
+    </main>
 {% endblock %}
