@@ -28,20 +28,25 @@ class Message
     private $reporting;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $isActive;
+    private ?bool $isActive;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Author;
+    private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="messages")
      */
     private $trick;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
 
     public function getId(): ?int
     {
@@ -86,12 +91,12 @@ class Message
 
     public function getAuthor(): ?User
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    public function setAuthor(?User $Author): self
+    public function setAuthor(?User $author): self
     {
-        $this->Author = $Author;
+        $this->author = $author;
 
         return $this;
     }
@@ -104,6 +109,18 @@ class Message
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

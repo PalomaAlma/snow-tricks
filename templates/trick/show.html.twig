@@ -35,12 +35,21 @@
         </ul>
     </section>
 
-    <form action="" class="text-center">
-        <label>
-            <input type="text">
-        </label>
-        <button></button>
+    {% if user %}
+    <form class="container" method="post">
+        <label for="content" class="text-start my-4">Laisser un Commentaire</label>
+        <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+        <div class="w-100 text-end container my-4">
+            <button type="submit" class="btn btn-primary ms-auto">Envoyer</button>
+        </div>
     </form>
+    {% endif %}
+
+    <ul>
+        {% for com in trick.messages %}
+            <li>{{ com.content }}</li>
+        {% endfor %}
+    </ul>
 
     <a href="{{ path('app_trick_index') }}">back to list</a>
 
