@@ -47,9 +47,13 @@
     </form>
     {% endif %}
 
-    <ul>
+    <ul class="list-group container">
         {% for com in trick.messages %}
-            <li>{{ com.content }}</li>
+            <li class="list-group-item py-4">
+                <div class="fw-bold"> {{ com.author }}</div>
+                <p>{{ com.content }}</p>
+                <div class="fw-lighter text-muted d-flex justify-content-between flex-wrap">{{ com.createAt|date }}<a href="">Signaler ce commentaire</a></div>
+            </li>
         {% endfor %}
     </ul>
 

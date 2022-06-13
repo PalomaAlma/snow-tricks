@@ -24,6 +24,10 @@ section#up.banner {
     justify-content: space-around;
 }
 
+ul li, ul {
+    background-color: transparent !important;
+}
+
 body {
     background-color:#e8e8e8 !important;
     color: #090909;
