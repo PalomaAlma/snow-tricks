@@ -24,8 +24,10 @@ class TrickController extends AbstractController
      */
     public function index(TrickRepository $trickRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
+            'user' => $user
         ]);
     }
 

@@ -3,11 +3,13 @@
 {% block title %}Trick{% endblock %}
 
 {% block main %}
+    {% if user %}
     <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
         <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
 
         {{ include('trick/_delete_form.html.twig') }}
     </div>
+    {% endif %}
     <section id="up" class="banner my-4" style="background-image: url({{ trick.banner }})">
         <h1 class="text-center">
             {{ trick.name }}
