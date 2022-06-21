@@ -3,11 +3,13 @@
 {% block title %}Trick{% endblock %}
 
 {% block main %}
+    {% if user %}
     <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
         <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
 
         {{ include('trick/_delete_form.html.twig') }}
     </div>
+    {% endif %}
     <section id="up" class="banner my-4" style="background-image: url({{ trick.banner }})">
         <h1 class="text-center">
             {{ trick.name }}
@@ -35,12 +37,25 @@
         </ul>
     </section>
 
-    <form action="" class="text-center">
-        <label>
-            <input type="text">
-        </label>
-        <button></button>
+    {% if user %}
+    <form class="container" method="post">
+        <label for="content" class="text-start my-4">Laisser un Commentaire</label>
+        <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+        <div class="w-100 text-end container my-4">
+            <button type="submit" class="btn btn-primary ms-auto">Envoyer</button>
+        </div>
     </form>
+    {% endif %}
+
+    <ul class="list-group container">
+        {% for com in trick.messages %}
+            <li class="list-group-item py-4">
+                <div class="fw-bold"> {{ com.author }}</div>
+                <p>{{ com.content }}</p>
+                <div class="fw-lighter text-muted d-flex justify-content-between flex-wrap">{{ com.createAt|date }}<a href="">Signaler ce commentaire</a></div>
+            </li>
+        {% endfor %}
+    </ul>
 
     <a href="{{ path('app_trick_index') }}">back to list</a>
 

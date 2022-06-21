@@ -11,9 +11,11 @@ SNOW TRICKS
             <a href="#down"></a>
         </section>
         <section id="down" class="trick-list my-4">
+            {% if user %}
             <div class="text-end my-4">
             <a href="{{ path('app_trick_new') }}">Create new</a>
             </div>
+            {% endif %}
             <ul class="d-flex justify-content-between">
                 {% for trick in tricks %}
                 <li class="card">
@@ -22,10 +24,12 @@ SNOW TRICKS
                         <div>
                             <a href="{{ path('app_trick_show', {'id': trick.id}) }}"><h2>{{ trick.name }}</h2></a>
                         </div>
+                        {% if user %}
                         <div class="ms-4">
                             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
                             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">delete</a>
                         </div>
+                        {% endif %}
                     </div>
                 </li>
                 {% else %}

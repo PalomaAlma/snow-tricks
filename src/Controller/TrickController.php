@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\Trick;
 use App\Form\TrickType;
+use App\Repository\MessageRepository;
 use App\Repository\TrickRepository;
+use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +24,10 @@ class TrickController extends AbstractController
      */
     public function index(TrickRepository $trickRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
+            'user' => $user
         ]);
     }
 
@@ -46,12 +52,27 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_trick_show", methods={"GET"})
+     * @Route("/{id}", name="app_trick_show", methods={"GET", "POST"})
      */
-    public function show(Trick $trick): Response
+    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository): Response
     {
+        $messageRepository->findByTrick($trick);
+        $user = $this->getUser();
+
+        $message = new Message();
+        $message->setCreateAt(new DateTimeImmutable('now'));
+        $message->setIsActive = true;
+        $message->setAuthor($user);
+        $message->setTrick($trick);
+
+        if ($request->isMethod('POST')) {
+//            dd($request);
+            $message->setContent($request->get('content'));
+            $messageRepository->add($message);
+        }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'user' => $user
         ]);
     }
 
