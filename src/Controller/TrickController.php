@@ -62,9 +62,9 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_trick_show", methods={"GET", "POST"})
+     * @Route("/{id}/page{page}", name="app_trick_show", methods={"GET", "POST"})
      */
-    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository): Response
+    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository, $page): Response
     {
         $messageRepository->findByTrick($trick);
         $user = $this->getUser();
@@ -75,6 +75,14 @@ class TrickController extends AbstractController
         $message->setAuthor($user);
         $message->setTrick($trick);
 
+        $messages = $messageRepository->findByTrick($trick);
+        $totalMessage = count($messages);
+        $messagePerPage = 10;
+        $nbPage = ceil($totalMessage / $messagePerPage);
+//        dd($nbPage);
+        $offset = ($page - 1) * $messagePerPage;
+        $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);
+
         if ($request->isMethod('POST')) {
 //            dd($request);
             $message->setContent($request->get('content'));
@@ -82,7 +90,10 @@ class TrickController extends AbstractController
         }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
-            'user' => $user
+            'user' => $user,
+            'page' => $page,
+            'messages' => $messages,
+            'nbPages' => $nbPage
         ]);
     }
 
