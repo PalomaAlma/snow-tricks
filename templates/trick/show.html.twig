@@ -48,7 +48,7 @@
     {% endif %}
 
     <ul class="list-group container">
-        {% for com in trick.messages %}
+        {% for com in messages %}
             <li class="list-group-item py-4">
                 <div class="fw-bold"> {{ com.author }}</div>
                 <p>{{ com.content }}</p>
@@ -56,7 +56,24 @@
             </li>
         {% endfor %}
     </ul>
-
-    <a href="{{ path('app_trick_index') }}">back to list</a>
+    <nav aria-label="Page navigation" class="pagination">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                                     href="/trick/{{ trick.id }}/page{% if page is same as(1) %}{{ page }}{% else %}{{ page -1 }}{% endif %}"><</a>
+            </li>
+            {% set k = 0 %}
+            {% for k in 0..nbPages| number_format(0, '.', ',') %}
+                {% if k < nbPages %}
+                {% set k=k+1 %}
+                <li class="page-item"><a class="page-link {% if k is same as(page) %}active{% endif %}"
+                                         href="/trick/{{ trick.id }}/page{{ k }}">{{ k }}</a></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item"><a class="page-link"
+                                     href="/trick/{{ trick.id }}/page{% if page > nbPages|length() %}{{ page }}{% else %}{{ page + 1 }}{% endif %}">></a>
+            </li>
+        </ul>
+    </nav>
+    <a href="{{ path('app_trick_index', {'page':1}) }}">back to list</a>
 
 {% endblock %}

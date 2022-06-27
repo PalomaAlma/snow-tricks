@@ -20,13 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/", name="app_trick_index", methods={"GET"})
+     * @Route("/page{page}", name="app_trick_index", methods={"GET"})
      */
-    public function index(TrickRepository $trickRepository): Response
+    public function index(TrickRepository $trickRepository, $page): Response
     {
         $user = $this->getUser();
+        $tricks = $trickRepository;
+        $totalTricks = count($tricks->findAll());
+        $trickPerPage = 5;
+        $nbPage = ceil($totalTricks / $trickPerPage);
+//        dd($nbPage);
+        $offset = ($page - 1) * $trickPerPage;
+        $tricks = $tricks->findByPage($trickPerPage, $offset);
+
         return $this->render('trick/index.html.twig', [
-            'tricks' => $trickRepository->findAll(),
+            'tricks' => $tricks,
+            'page' => $page,
+            'nbPages' => $nbPage,
             'user' => $user
         ]);
     }
@@ -42,7 +52,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->add($trick);
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/new.html.twig', [
@@ -52,9 +62,9 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_trick_show", methods={"GET", "POST"})
+     * @Route("/{id}/page{page}", name="app_trick_show", methods={"GET", "POST"})
      */
-    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository): Response
+    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository, $page): Response
     {
         $messageRepository->findByTrick($trick);
         $user = $this->getUser();
@@ -65,6 +75,14 @@ class TrickController extends AbstractController
         $message->setAuthor($user);
         $message->setTrick($trick);
 
+        $messages = $messageRepository->findByTrick($trick);
+        $totalMessage = count($messages);
+        $messagePerPage = 10;
+        $nbPage = ceil($totalMessage / $messagePerPage);
+//        dd($nbPage);
+        $offset = ($page - 1) * $messagePerPage;
+        $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);
+
         if ($request->isMethod('POST')) {
 //            dd($request);
             $message->setContent($request->get('content'));
@@ -72,7 +90,10 @@ class TrickController extends AbstractController
         }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
-            'user' => $user
+            'user' => $user,
+            'page' => $page,
+            'messages' => $messages,
+            'nbPages' => $nbPage
         ]);
     }
 
@@ -86,7 +107,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->add($trick);
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
@@ -104,6 +125,6 @@ class TrickController extends AbstractController
             $trickRepository->remove($trick);
         }
 
-        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
     }
 }

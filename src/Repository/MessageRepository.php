@@ -45,6 +45,21 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Message[] Returns an array of Trick objects
+     */
+
+    public function findByPage($value, $offset, $trick)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.trick = :trick')->setParameter('trick', $trick)
+            ->setMaxResults($value)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */
