@@ -41,6 +41,13 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (isset($_FILES['customer_registration']['name']['picture']) && $_FILES['customer_registration']['name']['picture'] != '') {
+                $extension = explode(".", $_FILES['customer_registration']['name']['picture']);
+                $filename = uniqid().'.'.end($extension);
+                move_uploaded_file($_FILES['customer_registration']['tmp_name']['picture'], dirname(__DIR__).'/../public/uploads/'.$filename);
+                $trick->setBanner($filename);
+            }
             $trickRepository->add($trick);
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -85,6 +92,13 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            dd($_FILES);
+            if (isset($_FILES['trick']['name']['banner']) && $_FILES['trick']['name']['banner'] != '') {
+                $extension = explode(".", $_FILES['trick']['name']['banner']);
+                $filename = uniqid().'.'.end($extension);
+                move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
+                $trick->setBanner($filename);
+            }
             $trickRepository->add($trick);
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
