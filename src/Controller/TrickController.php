@@ -20,13 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/", name="app_trick_index", methods={"GET"})
+     * @Route("/page{page}", name="app_trick_index", methods={"GET"})
      */
-    public function index(TrickRepository $trickRepository): Response
+    public function index(TrickRepository $trickRepository, $page): Response
     {
         $user = $this->getUser();
+        $tricks = $trickRepository;
+        $totalTricks = count($tricks->findAll());
+        $trickPerPage = 5;
+        $nbPage = ceil($totalTricks / $trickPerPage);
+//        dd($nbPage);
+        $offset = ($page - 1) * $trickPerPage;
+        $tricks = $tricks->findByPage($trickPerPage, $offset);
+
         return $this->render('trick/index.html.twig', [
-            'tricks' => $trickRepository->findAll(),
+            'tricks' => $tricks,
+            'page' => $page,
+            'nbPages' => $nbPage,
             'user' => $user
         ]);
     }
@@ -42,7 +52,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->add($trick);
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/new.html.twig', [
@@ -86,7 +96,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trickRepository->add($trick);
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
@@ -104,6 +114,6 @@ class TrickController extends AbstractController
             $trickRepository->remove($trick);
         }
 
-        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
     }
 }

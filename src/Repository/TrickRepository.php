@@ -45,6 +45,22 @@ class TrickRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+      * @return Trick[] Returns an array of Trick objects
+      */
+
+    public function findByPage($value, $offset)
+    {
+        return $this->createQueryBuilder('t')
+            ->setMaxResults($value)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Trick[] Returns an array of Trick objects
     //  */
