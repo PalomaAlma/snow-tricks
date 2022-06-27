@@ -22,7 +22,7 @@ SNOW TRICKS
                     <img src="{{ trick.banner }}" alt="{{ trick.name }}" class="card-img-top">
                     <div class="card-body d-flex justify-content-between">
                         <div>
-                            <a href="{{ path('app_trick_show', {'id': trick.id}) }}"><h2>{{ trick.name }}</h2></a>
+                            <a href="{{ path('app_trick_show', {'id': trick.id, 'page': 1}) }}"><h2>{{ trick.name }}</h2></a>
                         </div>
                         {% if user %}
                         <div class="ms-4">
