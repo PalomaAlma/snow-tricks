@@ -31,10 +31,10 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                <a class="nav-link" href="#">Tricks</a>
-                                <a class="nav-link" href="#">Sign in</a>
-                                <a class="nav-link">Sign up</a>
+                                <a class="nav-link active" aria-current="page" href="{{ path('app_trick_index') }}">Home</a>
+                                <a class="nav-link" href="{{ path('app_trick_index') }}">Tricks</a>
+                                <a class="nav-link" href="{{ path('app_register') }}">Sign in</a>
+                                <a class="nav-link" href="{{ path('app_login')}}">Sign up</a>
                             </div>
                         </div>
                     </div>
