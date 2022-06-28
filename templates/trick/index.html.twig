@@ -16,10 +16,10 @@ SNOW TRICKS
             <a href="{{ path('app_trick_new') }}">Create new</a>
             </div>
             {% endif %}
-            <ul class="d-flex justify-content-between">
+            <ul class="d-flex flex-wrap justify-content-between">
                 {% for trick in tricks %}
-                <li class="card">
-                    <img src="{{ trick.banner }}" alt="{{ trick.name }}" class="card-img-top">
+                <li class="card w-25 mx-4 my-4">
+                    <img src="/images/{{ trick.banner }}" alt="{{ trick.name }}" class="card-img-top">
                     <div class="card-body d-flex justify-content-between">
                         <div>
                             <a href="{{ path('app_trick_show', {'id': trick.id, 'page': 1}) }}"><h2>{{ trick.name }}</h2></a>
