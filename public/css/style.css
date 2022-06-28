@@ -3,12 +3,31 @@ header #banner {
 }
 
 section#up.banner {
-    /*background-image: url("https://images.pexels.com/photos/714256/pexels-photo-714256.jpeg?cs=srgb&dl=pexels-denis-linine-714256.jpg&fm=jpg");*/
-    background-position: bottom;
+    /*background-attachment: fixed;*/
     background-repeat: no-repeat;
-    background-size: 100vw;
-    /*height: 50vh;*/
-    margin-bottom:5rem;
+    background-size: 100%;
+    min-height: 75vh;
+    background-position: center !important;
+    display: flex;
+    color: #e8e8e8;
+}
+
+section#up.banner h1 {
+    margin: auto;
+}
+
+.deledit {
+    font-size: 2rem;
+}
+
+.deledit:hover {
+    transform: scale(1.5);
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.deledit:active {
+    border: 0 !important;
 }
 
 /*section#up.banner div {
@@ -49,7 +68,7 @@ body {
     border: 0;
 }
 
-input {
+input, textarea {
     color: #090909;
     padding: 0.7em 1.7em;
     margin: 1rem;
@@ -62,18 +81,18 @@ input {
     -1px -1px 6px #ffffff inset;
 }
 
-input:hover {
+input:hover, textarea:hover {
     border: 1px solid white;
 }
 
-input:focus {
+input:focus, textarea:focus {
     box-shadow: 4px 4px 12px #c5c5c5,
-    -4px -4px 12px #ffffff;
+    -4px -4px 12px #ffffff !important;
     border: 1px solid white !important;
 }
 
 /* From uiverse.io by @adamgiebl */
-button:not(.navbar button) {
+button:not(.navbar button, button.btn-delete) {
     color: #090909;
     padding: 0.7em 1.7em;
     font-size: 18px;
@@ -87,6 +106,8 @@ button:not(.navbar button) {
 
 button:hover {
     border: 1px solid white !important;
+    background: #e8e8e8 !important;
+    color: #090909 !important;
 }
 
 button:active {

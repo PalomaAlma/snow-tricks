@@ -3,14 +3,14 @@
 {% block title %}Trick index{% endblock %}
 
 {% block main %}
-    <main class="container">
-        <section id="up" class="banner my-4">
+    <main class="">
+        <section id="up" class="banner my-4" style="background:url(/images/pexels-leroy-filon-311065.jpg)">
             <h1 class="text-center">
 SNOW TRICKS
             </h1>
             <a href="#down"></a>
         </section>
-        <section id="down" class="trick-list my-4">
+        <section id="down" class="trick-list my-4 container">
             {% if user %}
             <div class="text-end my-4">
             <a href="{{ path('app_trick_new') }}">Create new</a>
@@ -26,8 +26,8 @@ SNOW TRICKS
                         </div>
                         {% if user %}
                         <div class="ms-4">
-                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">delete</a>
+                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}"><i class="bi bi-pencil btn"></i></a>
+                            {{ include('trick/_delete_form.html.twig') }}
                         </div>
                         {% endif %}
                     </div>

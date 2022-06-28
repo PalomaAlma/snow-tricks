@@ -4,26 +4,29 @@
 
 {% block main %}
     {% if user %}
-    <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
-        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+        <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
+            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>
 
-        {{ include('trick/_delete_form.html.twig') }}
-    </div>
+            {{ include('trick/_delete_form.html.twig') }}
+        </div>
     {% endif %}
-    <section id="up" class="banner my-4" style="background-image: url({{ trick.banner }})">
+    <section id="up"
+             class="banner my-4"
+             style="background-image: url('/images/{{ trick.banner }}');">
+        {#        <img src="/images/{{ trick.banner }}" alt=""> #}
         <h1 class="text-center">
             {{ trick.name }}
         </h1>
     </section>
     <section class="text-center">
-    <ul class="list-inline">
-        <li class="list-inline-item"><img src="" alt="1"></li>
-        <li class="list-inline-item"><img src="" alt="2"></li>
-        <li class="list-inline-item"><img src="" alt="3"></li>
-        <li class="list-inline-item"><img src="" alt="4"></li>
-        <li class="list-inline-item"><img src="" alt="5"></li>
-        <li class="list-inline-item"><img src="" alt="6"></li>
-    </ul>
+        <ul class="list-inline">
+            <li class="list-inline-item"><img src="" alt="1"></li>
+            <li class="list-inline-item"><img src="" alt="2"></li>
+            <li class="list-inline-item"><img src="" alt="3"></li>
+            <li class="list-inline-item"><img src="" alt="4"></li>
+            <li class="list-inline-item"><img src="" alt="5"></li>
+            <li class="list-inline-item"><img src="" alt="6"></li>
+        </ul>
     </section>
     <section class="text-center">
         <p>{{ trick.description }}</p>
@@ -38,13 +41,13 @@
     </section>
 
     {% if user %}
-    <form class="container" method="post">
-        <label for="content" class="text-start my-4">Laisser un Commentaire</label>
-        <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
-        <div class="w-100 text-end container my-4">
-            <button type="submit" class="btn btn-primary ms-auto">Envoyer</button>
-        </div>
-    </form>
+        <form class="container" method="post">
+            <label for="content" class="text-start my-4">Laisser un Commentaire</label>
+            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+            <div class="w-100 text-end container my-4">
+                <button type="submit" class="btn btn-primary ms-auto">Envoyer</button>
+            </div>
+        </form>
     {% endif %}
 
     <ul class="list-group container">
@@ -52,7 +55,8 @@
             <li class="list-group-item py-4">
                 <div class="fw-bold"> {{ com.author }}</div>
                 <p>{{ com.content }}</p>
-                <div class="fw-lighter text-muted d-flex justify-content-between flex-wrap">{{ com.createAt|date }}<a href="">Signaler ce commentaire</a></div>
+                <div class="fw-lighter text-muted d-flex justify-content-between flex-wrap">{{ com.createAt|date }}<a
+                            href="">Signaler ce commentaire</a></div>
             </li>
         {% endfor %}
     </ul>
