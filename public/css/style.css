@@ -16,17 +16,17 @@ section#up.banner h1 {
     margin: auto;
 }
 
-.deledit {
+#up .deledit {
     font-size: 2rem;
 }
 
-.deledit:hover {
+#up .deledit:hover {
     transform: scale(1.5);
     border: 0 !important;
     background: transparent !important;
 }
 
-.deledit:active {
+#up .deledit:active {
     border: 0 !important;
 }
 
@@ -92,7 +92,7 @@ input:focus, textarea:focus {
 }
 
 /* From uiverse.io by @adamgiebl */
-button:not(.navbar button, button.btn-delete) {
+button:not(.navbar button, button.btn-delete), a.btn {
     color: #090909;
     padding: 0.7em 1.7em;
     font-size: 18px;
@@ -104,7 +104,7 @@ button:not(.navbar button, button.btn-delete) {
     -6px -6px 12px #ffffff;
 }
 
-button:hover {
+button:hover, a.btn:hover {
     border: 1px solid white !important;
     background: #e8e8e8 !important;
     color: #090909 !important;
