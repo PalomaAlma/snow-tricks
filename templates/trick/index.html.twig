@@ -25,8 +25,8 @@ SNOW TRICKS
                             <a href="{{ path('app_trick_show', {'id': trick.id, 'page': 1}) }}"><h2>{{ trick.name }}</h2></a>
                         </div>
                         {% if user %}
-                        <div class="ms-4">
-                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}"><i class="bi bi-pencil btn"></i></a>
+                        <div class="ms-4 d-flex">
+                            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning"><i class="text-warning bi bi-pencil btn"></i></a>
                             {{ include('trick/_delete_form.html.twig') }}
                         </div>
                         {% endif %}
@@ -57,6 +57,6 @@ SNOW TRICKS
 {#                </ul>#}
 {#            </nav>#}
         </section>
-        <a href="#up" class="fixed-bottom display-1 text-end">^</a>
+{#        <a href="#up" class="fixed-bottom display-1 text-end">^</a>#}
     </main>
 {% endblock %}
