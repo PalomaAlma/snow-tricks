@@ -18,13 +18,13 @@
             {{ trick.name }}
         </h1>
     </section>
-    <section class="text-center">
-        <ul class="list-inline">
+    <section class="text-center d-flex justify-content-around">
+        <ul class="d-flex justify-content-right">
             {% for media in trick.media %}
-            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" style="max-width: 10rem"></li>
+            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" class="img-fluid" style="max-width: 15rem"></li>
             {% endfor %}
         </ul>
-        <ul class="list-inline">
+        <ul class="d-flex justify-content-left">
             {% for video in trick.videos %}
                 <li class="list-inline-item">
                     {{ video.url|raw }}</li>

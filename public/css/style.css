@@ -30,6 +30,12 @@ section#up.banner h1 {
     border: 0 !important;
 }
 
+iframe {
+
+    max-width: 15rem;
+    max-height: 15rem;
+}
+
 /*section#up.banner div {
     background-color: #c5c5c5;
     position: absolute;
