@@ -17,7 +17,9 @@ class TrickType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('banner', FileType::class)
+            ->add('banner', FileType::class, [
+                'mapped' => false
+            ])
             ->add('media', FileType::class, [
                 'multiple' => true,
                 'mapped' => false
