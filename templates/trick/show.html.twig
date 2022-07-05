@@ -20,12 +20,9 @@
     </section>
     <section class="text-center">
         <ul class="list-inline">
-            <li class="list-inline-item"><img src="" alt="1"></li>
-            <li class="list-inline-item"><img src="" alt="2"></li>
-            <li class="list-inline-item"><img src="" alt="3"></li>
-            <li class="list-inline-item"><img src="" alt="4"></li>
-            <li class="list-inline-item"><img src="" alt="5"></li>
-            <li class="list-inline-item"><img src="" alt="6"></li>
+            {% for media in trick.media %}
+            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" style="max-width: 10rem"></li>
+            {% endfor %}
         </ul>
     </section>
     <section class="text-center">
