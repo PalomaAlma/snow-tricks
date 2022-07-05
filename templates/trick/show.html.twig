@@ -24,6 +24,12 @@
             <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" style="max-width: 10rem"></li>
             {% endfor %}
         </ul>
+        <ul class="list-inline">
+            {% for video in trick.videos %}
+                <li class="list-inline-item">
+                    {{ video.url|raw }}</li>
+            {% endfor %}
+        </ul>
     </section>
     <section class="text-center">
         <p>{{ trick.description }}</p>
