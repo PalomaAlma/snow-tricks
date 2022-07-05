@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Media;
 use App\Entity\Message;
 use App\Entity\Trick;
 use App\Form\TrickType;
@@ -52,10 +53,29 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (isset($_FILES['customer_registration']['name']['picture']) && $_FILES['customer_registration']['name']['picture'] != '') {
-                $extension = explode(".", $_FILES['customer_registration']['name']['picture']);
+            if (isset($_FILES['trick']['name']['media']))
+            {
+
+                // On récupère les images transmises
+                $images = $form->get('media')->getData();
+
+                // On boucle sur les images
+                foreach($images as $image){
+                    $extension = explode(".", $image->getClientOriginalName());
+//                    dd($extension);
+                    $filename = uniqid().'.'.end($extension);
+                    move_uploaded_file($image, dirname(__DIR__).'/../public/images/'.$filename);
+
+                    // On crée l'image dans la base de données
+                    $img = new Media();
+                    $img->setName($filename);
+                    $trick->addMedium($img);
+                }
+            }
+            if (isset($_FILES['trick']['name']['banner']) && $_FILES['trick']['name']['banner'] != '') {
+                $extension = explode(".", $_FILES['trick']['name']['banner']);
                 $filename = uniqid().'.'.end($extension);
-                move_uploaded_file($_FILES['customer_registration']['tmp_name']['picture'], dirname(__DIR__).'/../public/uploads/'.$filename);
+                move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
                 $trick->setBanner($filename);
             }
             $trickRepository->add($trick);
