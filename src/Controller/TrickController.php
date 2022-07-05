@@ -21,7 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/page{page}", name="app_trick_index", methods={"GET"})
+     * @Route("/", name="homepage", methods={"GET"})
+     * @Route("/page{page?1}", name="app_trick_index", methods={"GET"})
      */
     public function index(TrickRepository $trickRepository, $page): Response
     {
