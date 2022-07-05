@@ -23,12 +23,12 @@ class Media
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="media")
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="media",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;

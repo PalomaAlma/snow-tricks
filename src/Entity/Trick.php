@@ -45,7 +45,8 @@ class Trick
     private $groupRelated;
 
     /**
-     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="trick",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="trick",cascade={"persist"},
+     *     orphanRemoval=true)
      */
     private $media;
 
