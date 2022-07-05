@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Entity\Message;
 use App\Entity\Trick;
+use App\Entity\Video;
 use App\Form\TrickType;
 use App\Repository\MessageRepository;
 use App\Repository\TrickRepository;
 use App\Repository\UserRepository;
+use App\Repository\VideoRepository;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +48,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, TrickRepository $trickRepository): Response
+    public function new(Request $request, TrickRepository $trickRepository, VideoRepository $videoRepository): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
@@ -78,6 +80,16 @@ class TrickController extends AbstractController
                 $filename = uniqid().'.'.end($extension);
                 move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
                 $trick->setBanner($filename);
+            }
+            if ($form->get('videos')->getData() !== null)
+            {
+                foreach (explode(',', $form->get('videos')->getData()) as $videoUrl)
+                {
+                    $video = new Video();
+                    $video->setUrl($videoUrl);
+                    $video->setTrick($trick);
+                    $videoRepository->add($video);
+                }
             }
             $trickRepository->add($trick);
             return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
