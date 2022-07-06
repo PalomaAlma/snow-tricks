@@ -30,6 +30,12 @@ section#up.banner h1 {
     border: 0 !important;
 }
 
+iframe {
+
+    max-width: 15rem;
+    max-height: 15rem;
+}
+
 /*section#up.banner div {
     background-color: #c5c5c5;
     position: absolute;
@@ -104,13 +110,13 @@ button:not(.navbar button, button.btn-delete), a.btn {
     -6px -6px 12px #ffffff;
 }
 
-button:hover, a.btn:hover {
+button:not(.deledit):hover, a.btn:not(.deledit):hover {
     border: 1px solid white !important;
     background: #e8e8e8 !important;
-    color: #090909 !important;
+    /*color: #090909 !important;*/
 }
 
-button:active {
+button:not(.deledit):active {
     box-shadow: 4px 4px 12px #c5c5c5,
     -4px -4px 12px #ffffff !important;
 }
@@ -124,4 +130,19 @@ button:active {
     box-shadow: 15px 15px 30px #c5c5c5,
     -15px -15px 30px #ffffff;
     border: 0;
+}
+
+
+.deledit:hover {
+    transform: scale(1.5);
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.deledit:active {
+    border: 0 !important;
+}
+
+.deledit:focus {
+    border: 0 !important;
 }

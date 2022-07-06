@@ -18,10 +18,30 @@
             {{ trick.name }}
         </h1>
     </section>
-    <section class="text-center">
-        <ul class="list-inline">
+    <section class="text-center d-flex justify-content-around">
+        <ul class="d-flex justify-content-right">
             {% for media in trick.media %}
-            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" style="max-width: 10rem"></li>
+            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" class="img-fluid" style="max-width: 15rem">
+                {% if user %}
+                    <div class="d-flex justify-content-end align-items-center">
+{#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
+
+                        {{ include('media/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}</li>
+            {% endfor %}
+        </ul>
+        <ul class="d-flex justify-content-left">
+            {% for video in trick.videos %}
+                <li class="list-inline-item">
+                    {{ video.url|raw }}
+                    {% if user %}
+                        <div class="d-flex justify-content-end align-items-center">
+{#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
+
+                            {{ include('video/_delete_form.html.twig') }}
+                        </div>
+                    {% endif %}</li>
             {% endfor %}
         </ul>
     </section>
