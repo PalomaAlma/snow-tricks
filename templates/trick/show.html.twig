@@ -3,7 +3,7 @@
 {% block title %}Trick{% endblock %}
 
 {% block main %}
-    {% if user %}
+    {% if user and trick.author is same as user %}
         <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>
 
@@ -15,14 +15,14 @@
              style="background-image: url('/images/{{ trick.banner }}');">
         {#        <img src="/images/{{ trick.banner }}" alt=""> #}
         <h1 class="text-center">
-            {{ trick.name }}
+            {{ trick.name }} | {{ trick.category }}
         </h1>
     </section>
     <section class="text-center d-flex justify-content-around">
         <ul class="d-flex justify-content-right">
             {% for media in trick.media %}
             <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" class="img-fluid" style="max-width: 15rem">
-                {% if user %}
+                {% if user and trick.author is same as user %}
                     <div class="d-flex justify-content-end align-items-center">
 {#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
 
@@ -35,7 +35,7 @@
             {% for video in trick.videos %}
                 <li class="list-inline-item">
                     {{ video.url|raw }}
-                    {% if user %}
+                    {% if user and trick.author is same as user %}
                         <div class="d-flex justify-content-end align-items-center">
 {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
 
@@ -51,9 +51,8 @@
 
     <section class="text-center">
         <ul class="list-inline">
-            <li class="list-inline-item">date de création</li>
-            <li class="list-inline-item">groupe</li>
-            <li class="list-inline-item">date de modification</li>
+            <li class="list-inline-item">Créé le {{ trick.createdAt|date("d/m/Y") }} par {{ trick.author }}</li>|
+            <li class="list-inline-item">Mis à jour le {{ trick.updatedAt|date("d/m/Y") }}</li>
         </ul>
     </section>
 

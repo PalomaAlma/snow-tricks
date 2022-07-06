@@ -24,7 +24,7 @@ SNOW TRICKS
                         <div>
                             <a href="{{ path('app_trick_show', {'id': trick.id, 'page': 1}) }}"><h2>{{ trick.name }}</h2></a>
                         </div>
-                        {% if user %}
+                        {% if user and trick.author is same as user %}
                         <div class="ms-4 d-flex">
                             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning"><i class="text-warning bi bi-pencil btn"></i></a>
                             {{ include('trick/_delete_form.html.twig') }}
