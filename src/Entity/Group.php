@@ -35,6 +35,7 @@ class Group
      */
     private $tricks;
 
+
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
@@ -98,4 +99,5 @@ class Group
 
         return $this;
     }
+
 }
