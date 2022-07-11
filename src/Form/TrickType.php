@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Group;
 use App\Entity\Trick;
 use App\Entity\Video;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -31,6 +32,9 @@ class TrickType extends AbstractType
             ->add('videos', TextareaType::class, [
                 'help' => 'Séparez chaque URL par une virgule',
                 'mapped' => false
+            ])
+            ->add('category', EntityType::class,[
+                'class' => Group::class
             ])
         ;
     }

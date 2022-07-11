@@ -6,9 +6,15 @@ use App\Repository\TrickRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TrickRepository::class)
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="Cette figure à déjà été enregistrée."
+ * )
  */
 class Trick
 {
@@ -20,7 +26,8 @@ class Trick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -54,6 +61,26 @@ class Trick
      * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", orphanRemoval=true,cascade={"persist"})
      */
     private $videos;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks")
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="trick")
+     */
+    private $category;
 
     public function __construct()
     {
@@ -205,6 +232,54 @@ class Trick
                 $video->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Group
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Group $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

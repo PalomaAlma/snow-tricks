@@ -35,9 +35,15 @@ class Group
      */
     private $tricks;
 
+
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -98,4 +104,5 @@ class Group
 
         return $this;
     }
+
 }

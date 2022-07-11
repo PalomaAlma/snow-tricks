@@ -31,7 +31,7 @@ class TrickController extends AbstractController
         $user = $this->getUser();
         $tricks = $trickRepository;
         $totalTricks = count($tricks->findAll());
-        $trickPerPage = 5;
+        $trickPerPage = 9;
         $nbPage = ceil($totalTricks / $trickPerPage);
 //        dd($nbPage);
         $offset = ($page - 1) * $trickPerPage;
@@ -50,6 +50,8 @@ class TrickController extends AbstractController
      */
     public function new(Request $request, TrickRepository $trickRepository, VideoRepository $videoRepository): Response
     {
+        $now = new \DateTimeImmutable('now');
+        $user = $this->getUser();
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
@@ -91,6 +93,10 @@ class TrickController extends AbstractController
                     $videoRepository->add($video);
                 }
             }
+            $trick->setAuthor($user);
+            $trick->setCreatedAt($now);
+            $trick->setUpdatedAt($now);
+
             $trickRepository->add($trick);
             return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
@@ -153,6 +159,7 @@ class TrickController extends AbstractController
                 move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
                 $trick->setBanner($filename);
             }
+            $trick->setUpdatedAt(new DateTimeImmutable('now'));
             $trickRepository->add($trick);
             return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
