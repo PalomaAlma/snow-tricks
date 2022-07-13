@@ -1,18 +1,14 @@
-header #banner {
-    margin-top: 7rem;
-}
-
 section#up.banner {
     /*background-attachment: fixed;*/
     background-repeat: no-repeat;
-    background-size: 100%;
-    min-height: 75vh;
+    background-size: cover;
+    min-height: 100vh;
     background-position: center !important;
     display: flex;
     color: #e8e8e8;
 }
 
-section#up.banner h1 {
+section#up.banner div {
     margin: auto;
 }
 
@@ -20,29 +16,11 @@ section#up.banner h1 {
     font-size: 2rem;
 }
 
-#up .deledit:hover {
-    transform: scale(1.5);
-    border: 0 !important;
-    background: transparent !important;
-}
-
-#up .deledit:active {
-    border: 0 !important;
-}
-
 iframe {
 
     max-width: 15rem;
     max-height: 15rem;
 }
-
-/*section#up.banner div {
-    background-color: #c5c5c5;
-    position: absolute;
-    height:100%;
-    width: 100%;
-    opacity: .5;
-}*/
 
 .tricks-list ul {
     display: flex;
@@ -121,10 +99,17 @@ button:not(.deledit):active {
     -4px -4px 12px #ffffff !important;
 }
 
+a {
+    color: #090909;
+    font-size: 18px;
+    transition: all .3s;
+}
+
 /* From uiverse.io by @adamgiebl */
 .card {
     /*width: 190px;
     height: 254px;*/
+    max-width: 25rem;
     border-radius: 30px;
     background: #e8e8e8;
     box-shadow: 15px 15px 30px #c5c5c5,
@@ -132,9 +117,9 @@ button:not(.deledit):active {
     border: 0;
 }
 
-
+/*
 .deledit:hover {
-    transform: scale(1.5);
+    transform: scale(1.5) !important;
     border: 0 !important;
     background: transparent !important;
 }
@@ -145,4 +130,4 @@ button:not(.deledit):active {
 
 .deledit:focus {
     border: 0 !important;
-}
+}*/
