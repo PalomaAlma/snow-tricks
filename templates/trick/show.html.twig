@@ -5,45 +5,112 @@
 {% block main %}
     {% if user and trick.author is same as user %}
         <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
-            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>
+            <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit fs-3"><i
+                        class="fa-solid fa-pencil"></i></a>
 
             {{ include('trick/_delete_form.html.twig') }}
         </div>
     {% endif %}
     <section id="up"
-             class="banner my-4"
+             class="banner"
              style="background-image: url('/images/{{ trick.banner }}');">
         {#        <img src="/images/{{ trick.banner }}" alt=""> #}
-        <h1 class="text-center">
-            {{ trick.name }} | {{ trick.category }}
-        </h1>
+        <div class=" text-center">
+            <h1 class="text-center">
+                {{ trick.name }} | {{ trick.category }}
+            </h1>
+            <a href="#down" class="link-light fs-1"><i class="fa-solid fa-arrow-down fa-beat"></i></a>
+        </div>
     </section>
-    <section class="text-center d-flex justify-content-around">
-        <ul class="d-flex justify-content-right">
-            {% for media in trick.media %}
-            <li class="list-inline-item"><img src="{{ asset('images/')}}{{ media.name }}" alt="{{ media.name }}" class="img-fluid" style="max-width: 15rem">
-                {% if user and trick.author is same as user %}
-                    <div class="d-flex justify-content-end align-items-center">
-{#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
+    <section class="text-center my-4 mx-4" id="down">
+        <ul class="d-xl-flex justify-content-between d-none list-unstyled">
+            <li class="">
+                <ul class="d-flex justify-content-evenly list-unstyled">
+                    {% for media in trick.media %}
+                        <li class="list-inline-item"><img src="{{ asset('images/') }}{{ media.name }}"
+                                                          alt="{{ media.name }}" class="img-fluid"
+                                                          style="max-width: 15rem">
+                            {% if user and trick.author is same as user %}
+                                <div class="d-flex justify-content-end align-items-center">
+                                    {#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
 
-                        {{ include('media/_delete_form.html.twig') }}
+                                    {{ include('media/_delete_form.html.twig') }}
+                                </div>
+                            {% endif %}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <ul class="d-flex justify-content-evenly list-unstyled">
+                    {% for video in trick.videos %}
+                        <li class="list-inline-item">
+                            {{ video.url|raw }}
+                            {% if user and trick.author is same as user %}
+                                <div class="d-flex justify-content-end align-items-center">
+                                    {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
+
+                                    {{ include('video/_delete_form.html.twig') }}
+                                </div>
+                            {% endif %}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn d-xl-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Voir les médias
+        </button>
+        <!-- Scrollable modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                {% endif %}</li>
-            {% endfor %}
-        </ul>
-        <ul class="d-flex justify-content-left">
-            {% for video in trick.videos %}
-                <li class="list-inline-item">
-                    {{ video.url|raw }}
-                    {% if user and trick.author is same as user %}
-                        <div class="d-flex justify-content-end align-items-center">
-{#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a>#}
+                    <div class="modal-body">
+                        <ul class="list-unstyled">
+                            <li class="">
+                                <ul class="list-unstyled">
+                                    {% for media in trick.media %}
+                                        <li class="list-inline-item"><img src="{{ asset('images/') }}{{ media.name }}"
+                                                                          alt="{{ media.name }}" class="img-fluid"
+                                                                          style="max-width: 15rem">
+                                            {% if user and trick.author is same as user %}
+                                                <div class="d-flex justify-content-end align-items-center">
+                                                    {#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
 
-                            {{ include('video/_delete_form.html.twig') }}
-                        </div>
-                    {% endif %}</li>
-            {% endfor %}
-        </ul>
+                                                    {{ include('media/_delete_form.html.twig') }}
+                                                </div>
+                                            {% endif %}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li>
+                                <ul class="list-unstyled">
+                                    {% for video in trick.videos %}
+                                        <li class="list-inline-item">
+                                            {{ video.url|raw }}
+                                            {% if user and trick.author is same as user %}
+                                                <div class="d-flex justify-content-end align-items-center">
+                                                    {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
+
+                                                    {{ include('video/_delete_form.html.twig') }}
+                                                </div>
+                                            {% endif %}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="text-center">
         <p>{{ trick.description }}</p>
@@ -51,10 +118,14 @@
 
     <section class="text-center">
         <ul class="list-inline">
-            <li class="list-inline-item">Créé le {{ trick.createdAt|date("d/m/Y") }} par {{ trick.author }}</li>|
+            <li class="list-inline-item">Créé le {{ trick.createdAt|date("d/m/Y") }} par {{ trick.author }}</li>
+            |
             <li class="list-inline-item">Mis à jour le {{ trick.updatedAt|date("d/m/Y") }}</li>
         </ul>
     </section>
+
+    <a href="{{ path('app_trick_index', {'page':1}) }}" class="btn btn-lg m-4"><i class="fa-solid fa-arrow-left-long"></i></a>
+    <hr>
 
     {% if user %}
         <form class="container" method="post">
@@ -76,24 +147,25 @@
             </li>
         {% endfor %}
     </ul>
+    {% if nbPages|length() > 1 %}
     <nav aria-label="Page navigation" class="pagination">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link"
+            <li class="page-item"><a class="page-link secondary-link"
                                      href="/trick/{{ trick.id }}/page{% if page is same as(1) %}{{ page }}{% else %}{{ page -1 }}{% endif %}"><</a>
             </li>
             {% set k = 0 %}
             {% for k in 0..nbPages| number_format(0, '.', ',') %}
                 {% if k < nbPages %}
-                {% set k=k+1 %}
-                <li class="page-item"><a class="page-link {% if k is same as(page) %}active{% endif %}"
-                                         href="/trick/{{ trick.id }}/page{{ k }}">{{ k }}</a></li>
+                    {% set k=k+1 %}
+                    <li class="page-item"><a class="page-link {% if k is same as(page) %}active{% endif %}"
+                                             href="/trick/{{ trick.id }}/page{{ k }}">{{ k }}</a></li>
                 {% endif %}
             {% endfor %}
-            <li class="page-item"><a class="page-link"
+            <li class="page-item"><a class="page-link secondary-link"
                                      href="/trick/{{ trick.id }}/page{% if page > nbPages|length() %}{{ page }}{% else %}{{ page + 1 }}{% endif %}">></a>
             </li>
         </ul>
     </nav>
-    <a href="{{ path('app_trick_index', {'page':1}) }}">back to list</a>
+    {% endif %}
 
 {% endblock %}
