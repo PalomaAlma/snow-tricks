@@ -4,7 +4,7 @@
 
 {% block main %}
     {% if user and trick.author is same as user %}
-        <div class="fixed-top d-flex justify-content-end align-items-center mt-5">
+        <div class="fixed-top d-flex justify-content-end align-items-center mt-5 languette">
             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit fs-3"><i
                         class="fa-solid fa-pencil"></i></a>
 
@@ -68,14 +68,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
                     </div>
                     <div class="modal-body">
                         <ul class="list-unstyled">
                             <li class="">
                                 <ul class="list-unstyled">
                                     {% for media in trick.media %}
-                                        <li class="list-inline-item"><img src="{{ asset('images/') }}{{ media.name }}"
+                                        <li class="my-4"><img src="{{ asset('images/') }}{{ media.name }}"
                                                                           alt="{{ media.name }}" class="img-fluid"
                                                                           style="max-width: 15rem">
                                             {% if user and trick.author is same as user %}
@@ -91,7 +91,7 @@
                             <li>
                                 <ul class="list-unstyled">
                                     {% for video in trick.videos %}
-                                        <li class="list-inline-item">
+                                        <li class="my-4">
                                             {{ video.url|raw }}
                                             {% if user and trick.author is same as user %}
                                                 <div class="d-flex justify-content-end align-items-center">
