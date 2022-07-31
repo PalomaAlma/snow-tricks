@@ -1,4 +1,35 @@
+<section class="container">
 {{ form_start(form) }}
+    <div class="row mx-auto">
+        <div class="col-md-4">
+            <label for="name" class="form-label mb-0">Nom du Trick</label>
+            {{ form_widget(form.name, {'attr':{'class': 'form-control mt-0'}}) }}
+        </div>
+        <div class="col-md-4">
+            <label for="category" class="form-label mb-0">Category</label>
+            {{ form_widget(form.category, {'attr':{'class': 'form-control mt-0'}}) }}
+        </div>
+        <div class="col-md-4">
+            <label for="banner" class="form-label mb-0">Bannière</label>
+            {{ form_widget(form.banner, {'attr':{'class': 'form-control mt-0'}}) }}
+        </div>
+    </div>
+    <div class="mx-auto">
+        <label for="description" class="form-label mb-0">Description</label>
+        {{ form_widget(form.description, {'attr':{'class': 'form-control mt-0'}}) }}
+    </div>
+    <div class="row mx-auto">
+        <div class="col-md-6">
+            <label for="media" class="form-label mb-0">Photos</label>
+            {{ form_widget(form.media, {'attr':{'class': 'form-control mt-0'}}) }}
+        </div>
+        <div class="col-md-6">
+            <label for="video" class="form-label mb-0">Vidéos</label>
+            {{ form_widget(form.videos, {'attr':{'class': 'form-control mt-0'}}) }}
+            {{ form_help(form.videos, {'attr':{'class': ''}}) }}
+        </div>
+    </div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+</section>

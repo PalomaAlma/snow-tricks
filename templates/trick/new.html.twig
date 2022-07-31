@@ -2,10 +2,12 @@
 
 {% block title %}New Trick{% endblock %}
 
-{% block body %}
-    <h1>Create new Trick</h1>
+{% block main %}
+    <section class="my-4">
+    <h1 class="text-center">Créer un nouveau trick</h1>
+        <a href="{{ path('app_trick_index', {'page':1}) }}" class="btn btn-lg m-4"><i class="fa-solid fa-arrow-left-long"></i></a>
+        <hr>
 
     {{ include('trick/_form.html.twig') }}
-
-    <a href="{{ path('app_trick_index', {'page':1}) }}">back to list</a>
+    </section>
 {% endblock %}
