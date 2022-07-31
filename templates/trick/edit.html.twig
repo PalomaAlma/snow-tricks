@@ -3,11 +3,14 @@
 {% block title %}Edit Trick{% endblock %}
 
 {% block main %}
-    <h1>Edit Trick</h1>
+    <section class="my-4">
+    <h1 class="text-center">Modifier Trick {{ trick.name }}</h1>
 
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_trick_index', {'page':1}) }}">back to list</a>
-
-    {{ include('trick/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-between">
+    <a href="{{ path('app_trick_show', {'id':trick.id, 'page':1}) }}" class="btn btn-lg m-4"><i class="fa-solid fa-arrow-left-long"></i></a>
+        {{ include('trick/_delete_form.html.twig') }}
+    </div>
+    <hr>
+    {{ include('trick/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    </section>
 {% endblock %}
