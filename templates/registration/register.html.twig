@@ -6,11 +6,13 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-<div class="container">
-    <h1>Inscription</h1>
+<section class="my-4">
+    <h1 class="text-center">Inscription</h1>
+        <a href="{{ path('app_trick_index', {'page':1}) }}" class="btn btn-lg m-4"><i class="fa-solid fa-arrow-left-long"></i></a>
+        <hr>
 
     {{ form_start(registrationForm) }}
-
+<div class="container">
     <div class="row mx-auto">
             <div class="col-md-4">
                 <label for="firstname" class="form-label mb-0 ">Prénom</label>
@@ -53,7 +55,8 @@
             Inscription
         </button>
     </div>
-    {{ form_end(registrationForm) }}
 </div>
+    {{ form_end(registrationForm) }}
+</section>
 
 {% endblock %}
