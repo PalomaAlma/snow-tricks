@@ -33,7 +33,6 @@ class TrickController extends AbstractController
         $totalTricks = count($tricks->findAll());
         $trickPerPage = 9;
         $nbPage = ceil($totalTricks / $trickPerPage);
-//        dd($nbPage);
         $offset = ($page - 1) * $trickPerPage;
         $tricks = $tricks->findByPage($trickPerPage, $offset);
 
@@ -67,7 +66,6 @@ class TrickController extends AbstractController
                 // On boucle sur les images
                 foreach($images as $image){
                     $extension = explode(".", $image->getClientOriginalName());
-//                    dd($extension);
                     $filename = uniqid().'.'.end($extension);
                     move_uploaded_file($image, dirname(__DIR__).'/../public/images/'.$filename);
 
@@ -125,12 +123,10 @@ class TrickController extends AbstractController
         $totalMessage = count($messages);
         $messagePerPage = 10;
         $nbPage = ceil($totalMessage / $messagePerPage);
-//        dd($nbPage);
         $offset = ($page - 1) * $messagePerPage;
         $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);
 
         if ($request->isMethod('POST')) {
-//            dd($request);
             $message->setContent($request->get('content'));
             $messageRepository->add($message);
         }
@@ -161,7 +157,6 @@ class TrickController extends AbstractController
                 // On boucle sur les images
                 foreach($images as $image){
                     $extension = explode(".", $image->getClientOriginalName());
-//                    dd($extension);
                     $filename = uniqid().'.'.end($extension);
                     move_uploaded_file($image, dirname(__DIR__).'/../public/images/'.$filename);
 
