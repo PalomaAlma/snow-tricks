@@ -143,3 +143,72 @@ a {
 .deledit:focus {
     border: 0 !important;
 }*/
+
+#carouselMedia, #carouselVideo {
+    position: relative;
+    height: 400px;
+    top: 0;
+    /*transform: translateY(-50%);*/
+    overflow: hidden;
+    width: 50vw;
+}
+
+#carouselMedia div, #carouselVideo div {
+    position: absolute;
+    transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+    opacity: 1;
+}
+
+#carouselVideo div iframe {
+    width: 400px;
+    transition: width 1s;
+}
+
+#carouselMedia div img {
+    max-width: 400px;
+    max-height: 300px;
+    transition: width 1s;
+}
+
+#carouselMedia div.hideLeft, #carouselVideo div.hideLeft {
+    left: 0%;
+    opacity: 0;
+    width: 200px;
+}
+
+#carouselMedia div.hideRight, #carouselVideo div.hideRight {
+    left: 100%;
+    opacity: 0;
+    width: 200px;
+}
+
+#carouselMedia div.prev, #carouselVideo div.prev {
+    z-index: 5;
+    left: 30%;
+    width: 300px;
+}
+
+#carouselMedia div.prevLeftSecond, #carouselVideo div.prevLeftSecond {
+    z-index: 4;
+    left: 15%;
+    opacity: .7;
+    width: 200px
+}
+
+#carouselMedia div.selected, #carouselVideo div.selected {
+    z-index: 10;
+    left: 50%;
+}
+
+#carouselMedia div.next, #carouselVideo div.next {
+    z-index: 5;
+    left: 70%;
+    width: 300px;
+}
+
+#carouselMedia div.nextRightSecond, #carouselVideo div.nextRightSecond {
+    z-index: 4;
+    left: 85%;
+    opacity: .7;
+    width: 200px;
+}
