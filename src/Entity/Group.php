@@ -31,7 +31,7 @@ class Group
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="groupRelated")
+     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="category")
      */
     private $tricks;
 

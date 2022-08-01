@@ -71,7 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="Author")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="author")
      */
     private $messages;
 
