@@ -58,7 +58,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (isset($_FILES['trick']['name']['media']))
+            if ($form->get('media')->getData() !== null)
             {
 
                 // On récupère les images transmises
@@ -77,10 +77,10 @@ class TrickController extends AbstractController
                     $trick->addMedium($img);
                 }
             }
-            if (isset($_FILES['trick']['name']['banner']) && $_FILES['trick']['name']['banner'] != '') {
-                $extension = explode(".", $_FILES['trick']['name']['banner']);
+            if ($form->get('banner')->getData() !== null && $form->get('banner')->getData() != '') {
+                $extension = explode(".", $form->get('banner')->getData()->getClientOriginalName());
                 $filename = uniqid().'.'.end($extension);
-                move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
+                move_uploaded_file($form->get('banner')->getData(), dirname(__DIR__).'/../public/images/'.$filename);
                 $trick->setBanner($filename);
             }
             if ($form->get('videos')->getData() !== null)
@@ -146,18 +146,46 @@ class TrickController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_trick_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
+    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, VideoRepository $videoRepository): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            dd($_FILES);
-            if (isset($_FILES['trick']['name']['banner']) && $_FILES['trick']['name']['banner'] != '') {
-                $extension = explode(".", $_FILES['trick']['name']['banner']);
+            if ($form->get('media')->getData() !== null)
+            {
+
+                // On récupère les images transmises
+                $images = $form->get('media')->getData();
+
+                // On boucle sur les images
+                foreach($images as $image){
+                    $extension = explode(".", $image->getClientOriginalName());
+//                    dd($extension);
+                    $filename = uniqid().'.'.end($extension);
+                    move_uploaded_file($image, dirname(__DIR__).'/../public/images/'.$filename);
+
+                    // On crée l'image dans la base de données
+                    $img = new Media();
+                    $img->setName($filename);
+                    $trick->addMedium($img);
+                }
+            }
+            if ($form->get('banner')->getData() !== null && $form->get('banner')->getData() != '') {
+                $extension = explode(".", $form->get('banner')->getData()->getClientOriginalName());
                 $filename = uniqid().'.'.end($extension);
-                move_uploaded_file($_FILES['trick']['tmp_name']['banner'], dirname(__DIR__).'/../public/images/'.$filename);
+                move_uploaded_file($form->get('banner')->getData(), dirname(__DIR__).'/../public/images/'.$filename);
                 $trick->setBanner($filename);
+            }
+            if ($form->get('videos')->getData() !== null)
+            {
+                foreach (explode(',', $form->get('videos')->getData()) as $videoUrl)
+                {
+                    $video = new Video();
+                    $video->setUrl($videoUrl);
+                    $video->setTrick($trick);
+                    $videoRepository->add($video);
+                }
             }
             $trick->setUpdatedAt(new DateTimeImmutable('now'));
             $trickRepository->add($trick);
@@ -175,8 +203,11 @@ class TrickController extends AbstractController
      */
     public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
-            $trickRepository->remove($trick);
+        if ($trick->getAuthor() === $this->getUser())
+        {
+            if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
+                $trickRepository->remove($trick);
+            }
         }
 
         return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
