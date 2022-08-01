@@ -212,3 +212,7 @@ a {
     opacity: .7;
     width: 200px;
 }
+
+#carouselMedia div:not(.selected) .align-items-center {
+    display: none !important;
+}
