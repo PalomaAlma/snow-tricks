@@ -46,10 +46,6 @@ class Trick
      */
     private $messages;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="tricks")
-     */
-    private $groupRelated;
 
     /**
      * @ORM\OneToMany(targetEntity=Media::class, mappedBy="trick",cascade={"persist"},
@@ -78,7 +74,7 @@ class Trick
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="trick")
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="tricks")
      */
     private $category;
 
@@ -160,18 +156,6 @@ class Trick
                 $message->setTrick(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getGroupRelated(): ?Group
-    {
-        return $this->groupRelated;
-    }
-
-    public function setGroupRelated(?Group $groupRelated): self
-    {
-        $this->groupRelated = $groupRelated;
 
         return $this;
     }

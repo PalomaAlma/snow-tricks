@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -21,13 +22,36 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('pseudo')
-            ->add('email', EmailType::class)
-            ->add('picture', FileType::class)
-            ->add('birthday', DateType::class)
+            ->add('firstname', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => ''
+                ]
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => ''
+                    ]
+                ])
+            ->add('pseudo', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => ''
+                    ]
+                ])
+            ->add('email', EmailType::class, [
+                'label' => false,
+            ])
+            ->add('picture', FileType::class, [
+                'label' => false,
+                ])
+            ->add('birthday', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text'
+                ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les condition d\'utilisation',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -36,6 +60,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => false,
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -52,7 +77,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('submit', SubmitType::class)
+/*            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => '']
+            ])*/
         ;
     }
 

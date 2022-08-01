@@ -1,18 +1,14 @@
-header #banner {
-    margin-top: 7rem;
-}
-
 section#up.banner {
     /*background-attachment: fixed;*/
     background-repeat: no-repeat;
-    background-size: 100%;
-    min-height: 75vh;
+    background-size: cover;
+    min-height: 100vh;
     background-position: center !important;
     display: flex;
     color: #e8e8e8;
 }
 
-section#up.banner h1 {
+section#up.banner div {
     margin: auto;
 }
 
@@ -20,29 +16,11 @@ section#up.banner h1 {
     font-size: 2rem;
 }
 
-#up .deledit:hover {
-    transform: scale(1.5);
-    border: 0 !important;
-    background: transparent !important;
-}
-
-#up .deledit:active {
-    border: 0 !important;
-}
-
 iframe {
 
     max-width: 15rem;
     max-height: 15rem;
 }
-
-/*section#up.banner div {
-    background-color: #c5c5c5;
-    position: absolute;
-    height:100%;
-    width: 100%;
-    opacity: .5;
-}*/
 
 .tricks-list ul {
     display: flex;
@@ -121,10 +99,29 @@ button:not(.deledit):active {
     -4px -4px 12px #ffffff !important;
 }
 
+.languette {
+      color: #090909;
+      padding: 0.5em .5em;
+      font-size: 18px;
+      border-radius: 0.5em 0 0 0.5em;
+      background: #e8e8e8;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 -6px 10px #c5c5c5 inset,  6px 6px 12px #ffffff inset;
+    width: 6.5rem;
+    margin-left: auto;
+  }
+
+a {
+    color: #090909;
+    font-size: 18px;
+    transition: all .3s;
+}
+
 /* From uiverse.io by @adamgiebl */
 .card {
     /*width: 190px;
     height: 254px;*/
+    max-width: 25rem;
     border-radius: 30px;
     background: #e8e8e8;
     box-shadow: 15px 15px 30px #c5c5c5,
@@ -132,9 +129,9 @@ button:not(.deledit):active {
     border: 0;
 }
 
-
+/*
 .deledit:hover {
-    transform: scale(1.5);
+    transform: scale(1.5) !important;
     border: 0 !important;
     background: transparent !important;
 }
@@ -145,4 +142,73 @@ button:not(.deledit):active {
 
 .deledit:focus {
     border: 0 !important;
+}*/
+
+#carouselMedia, #carouselVideo {
+    position: relative;
+    height: 400px;
+    top: 0;
+    /*transform: translateY(-50%);*/
+    overflow: hidden;
+    width: 50vw;
+}
+
+#carouselMedia div, #carouselVideo div {
+    position: absolute;
+    transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+    opacity: 1;
+}
+
+#carouselVideo div iframe {
+    width: 400px;
+    transition: width 1s;
+}
+
+#carouselMedia div img {
+    max-width: 400px;
+    max-height: 300px;
+    transition: width 1s;
+}
+
+#carouselMedia div.hideLeft, #carouselVideo div.hideLeft {
+    left: 0%;
+    opacity: 0;
+    width: 200px;
+}
+
+#carouselMedia div.hideRight, #carouselVideo div.hideRight {
+    left: 100%;
+    opacity: 0;
+    width: 200px;
+}
+
+#carouselMedia div.prev, #carouselVideo div.prev {
+    z-index: 5;
+    left: 30%;
+    width: 300px;
+}
+
+#carouselMedia div.prevLeftSecond, #carouselVideo div.prevLeftSecond {
+    z-index: 4;
+    left: 15%;
+    opacity: .7;
+    width: 200px
+}
+
+#carouselMedia div.selected, #carouselVideo div.selected {
+    z-index: 10;
+    left: 50%;
+}
+
+#carouselMedia div.next, #carouselVideo div.next {
+    z-index: 5;
+    left: 70%;
+    width: 300px;
+}
+
+#carouselMedia div.nextRightSecond, #carouselVideo div.nextRightSecond {
+    z-index: 4;
+    left: 85%;
+    opacity: .7;
+    width: 200px;
 }
