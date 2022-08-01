@@ -19,36 +19,38 @@
             opacity: 1;
         }
 
-        #carouselMedia div img, #carouselVideo div iframe {
+        #carouselVideo div iframe {
             width: 400px;
+            transition: width 1s;
+        }
+
+        #carouselMedia div img {
+            max-width: 400px;
+            max-height: 300px;
             transition: width 1s;
         }
 
         #carouselMedia div.hideLeft, #carouselVideo div.hideLeft {
             left: 0%;
             opacity: 0;
-            transform: translateY(50%) translateX(-50%);
             width: 200px;
         }
 
         #carouselMedia div.hideRight, #carouselVideo div.hideRight {
             left: 100%;
             opacity: 0;
-            transform: translateY(50%) translateX(-50%);
             width: 200px;
         }
 
         #carouselMedia div.prev, #carouselVideo div.prev {
             z-index: 5;
             left: 30%;
-            transform: translateY(50px) translateX(-50%);
             width: 300px;
         }
 
         #carouselMedia div.prevLeftSecond, #carouselVideo div.prevLeftSecond {
             z-index: 4;
             left: 15%;
-            transform: translateY(50%) translateX(-50%);
             opacity: .7;
             width: 200px
         }
@@ -56,21 +58,17 @@
         #carouselMedia div.selected, #carouselVideo div.selected {
             z-index: 10;
             left: 50%;
-            transform: translateY(0px) translateX(-50%);
         }
 
         #carouselMedia div.next, #carouselVideo div.next {
             z-index: 5;
             left: 70%;
-            transform: translateY(50px) translateX(-50%);
             width: 300px;
         }
 
         #carouselMedia div.nextRightSecond, #carouselVideo div.nextRightSecond {
             z-index: 4;
             left: 85%;
-            transform: translateY(
-                    50%) translateX(-50%);
             opacity: .7;
             width: 200px;
         }
@@ -99,6 +97,7 @@
     <section class="text-center my-4 mx-4" id="down">
         <div class="d-xl-flex justify-content-between">
             <div id="carouselMedia">
+                <p>Cliquez sur chaque image pour la faire défiler</p>
                 {% set i = 0 %}
                 {% for media in trick.media %}
                     <div class="{% if i == 0 %}selected{% elseif i == 1 %}next{% elseif i == 2 %}nextRightSecond{% elseif i == 3 %}hideRight{% endif %}">
