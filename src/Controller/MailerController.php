@@ -28,9 +28,7 @@ class MailerController extends AbstractController
             ->subject('Time for Symfony Mailer!')
             ->text('Sending emails is fun again!')
             ->html('<p>See Twig integration for better HTML integration!</p>');
-//dd($email);
         $mailer->send($email);
-dd($mailer);
 
         return $this->redirectToRoute('app_trick_index', ['page'=>1]);
     }
