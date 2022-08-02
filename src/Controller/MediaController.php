@@ -79,10 +79,11 @@ class MediaController extends AbstractController
      */
     public function delete(Request $request, Media $medium, MediaRepository $mediaRepository): Response
     {
+        $trick = $medium->getTrick()->getId();
         if ($this->isCsrfTokenValid('delete'.$medium->getId(), $request->request->get('_token'))) {
             $mediaRepository->remove($medium);
         }
 
-        return $this->redirectToRoute('app_media_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1], Response::HTTP_SEE_OTHER);
     }
 }

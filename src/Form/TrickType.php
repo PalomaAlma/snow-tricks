@@ -27,11 +27,13 @@ class TrickType extends AbstractType
             ])
             ->add('media', FileType::class, [
                 'multiple' => true,
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add('videos', TextareaType::class, [
-                'help' => 'Séparez chaque URL par une virgule',
-                'mapped' => false
+                'help' => 'Récupérer la balise "intégrer" sur Youtube ou Dailymotion et insérer les en les séparant une virgule',
+                'mapped' => false,
+                'required' => false
             ])
             ->add('category', EntityType::class,[
                 'class' => Group::class

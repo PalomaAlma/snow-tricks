@@ -79,10 +79,11 @@ class VideoController extends AbstractController
      */
     public function delete(Request $request, Video $video, VideoRepository $videoRepository): Response
     {
+        $trick = $video->getTrick()->getId();
         if ($this->isCsrfTokenValid('delete'.$video->getId(), $request->request->get('_token'))) {
             $videoRepository->remove($video);
         }
 
-        return $this->redirectToRoute('app_video_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1], Response::HTTP_SEE_OTHER);
     }
 }
