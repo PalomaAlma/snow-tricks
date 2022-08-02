@@ -198,7 +198,8 @@ class TrickController extends AbstractController
      */
     public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
-        $delete = 'delete'.$trick->getId();
+        $trickId = $trick->getId();
+        $delete = 'delete'.$trickId;
         if ($trick->getAuthor() === $this->getUser())
         {
             if ($this->isCsrfTokenValid($delete, $request->request->get('_token'))) {
