@@ -79,8 +79,9 @@ class MediaController extends AbstractController
      */
     public function delete(Request $request, Media $medium, MediaRepository $mediaRepository): Response
     {
+        $delete = 'delete';
         $trick = $medium->getTrick()->getId();
-        if ($this->isCsrfTokenValid('delete'.$medium->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid($delete.$medium->getId(), $request->request->get('_token'))) {
             $mediaRepository->remove($medium);
         }
 
