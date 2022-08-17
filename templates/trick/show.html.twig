@@ -23,7 +23,7 @@
         </div>
     </section>
     <section class="text-center my-4 mx-4" id="down">
-        <div class="d-xl-flex justify-content-between">
+        <div class="d-xl-flex justify-content-between d-none">
             <div id="carouselMedia">
                 <p>Cliquez sur chaque image pour la faire défiler</p>
                 {% set i = 0 %}
@@ -42,14 +42,27 @@
                 {% endfor %}
 
             </div>
-            <div id="carouselVideo">
+            <ul class="d-flex justify-content-evenly list-unstyled">
+                {% for video in trick.videos|slice(0,3) %}
+                    <li class="list-inline-item">
+                        {{ video.url|raw }}
+                        {% if user and trick.author is same as user %}
+                            <div class="d-flex justify-content-end align-items-center">
+                                {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
+
+                                {{ include('video/_delete_form.html.twig') }}
+                            </div>
+                        {% endif %}</li>
+                {% endfor %}
+            </ul>
+            {#<div id="carouselVideo">
                 {% set i = 0 %}
                 {% for video in trick.videos %}
                     <div class="{% if i == 0 %}selected{% elseif i == 1 %}next{% elseif i == 2 %}nextRightSecond{% elseif i == 3 %}hideRight{% endif %}">
                         {{ video.url|raw }}
                         {% if user and trick.author is same as user %}
                             <div class="d-flex justify-content-end align-items-center">
-                                {#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
+                                #}{#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}{#
 
                                 {{ include('video/_delete_form.html.twig') }}
                             </div>
@@ -57,7 +70,7 @@
                     {% set i = i+1 %}
                 {% endfor %}
 
-            </div>
+            </div>#}
         </div>
 
         <ul class="d-none justify-content-between d-none list-unstyled">
@@ -104,7 +117,6 @@
 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                                     class="fas fa-times"></i></button>
                     </div>
