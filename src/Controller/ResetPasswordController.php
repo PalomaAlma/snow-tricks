@@ -43,6 +43,11 @@ class ResetPasswordController extends AbstractController
      */
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('app_trick_index');
+        }
+
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
 
@@ -84,6 +89,10 @@ class ResetPasswordController extends AbstractController
      */
     public function reset(Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('app_trick_index');
+        }
         if ($token) {
             // We store the token in session and remove it from the URL, to avoid the URL being
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
