@@ -1,5 +1,5 @@
 <section class="container">
-{{ form_start(form) }}
+    {{ form_start(form) }}
     <div class="row mx-auto">
         <div class="col-md-4">
             <label for="name" class="form-label mb-0">Nom du Trick</label>
@@ -14,9 +14,11 @@
             {{ form_widget(form.banner, {'attr':{'class': 'form-control mt-0'}}) }}
         </div>
     </div>
-    <div class="mx-auto">
-        <label for="description" class="form-label mb-0">Description</label>
-        {{ form_widget(form.description, {'attr':{'class': 'form-control mt-0'}}) }}
+    <div class="row mx-auto">
+        <div class="col-md-12">
+            <label for="description" class="form-label mb-0">Description</label>
+            {{ form_widget(form.description, {'attr':{'class': 'form-control mt-0'}}) }}
+        </div>
     </div>
     <div class="row mx-auto">
         <div class="col-md-6">
@@ -31,5 +33,5 @@
     </div>
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+    {{ form_end(form) }}
 </section>

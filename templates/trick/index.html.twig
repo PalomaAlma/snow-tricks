@@ -14,8 +14,9 @@
         </section>
         <section id="down" class="trick-list my-4 container">
             {% if user %}
-                <div class="text-end my-4">
-                    <a href="{{ path('app_trick_new') }}" class="link-secondary fs-1"><i class="fa-solid fa-circle-plus"></i></a>
+                <div class="fixed-top d-flex justify-content-end align-items-center mt-5 languette">
+                    <a href="{{ path('app_trick_new') }}" class="link-secondary fs-1 me-4"><i class="fa-solid fa-circle-plus"></i></a>
+
                 </div>
             {% endif %}
             <ul class="d-flex flex-wrap justify-content-center">

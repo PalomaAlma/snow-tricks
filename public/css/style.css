@@ -185,13 +185,14 @@ a {
 #carouselMedia div.prev, #carouselVideo div.prev {
     z-index: 5;
     left: 30%;
+    opacity: .7;
     width: 300px;
 }
 
 #carouselMedia div.prevLeftSecond, #carouselVideo div.prevLeftSecond {
     z-index: 4;
     left: 15%;
-    opacity: .7;
+    opacity: .5;
     width: 200px
 }
 
@@ -203,6 +204,7 @@ a {
 #carouselMedia div.next, #carouselVideo div.next {
     z-index: 5;
     left: 70%;
+    opacity: .7;
     width: 300px;
 }
 
