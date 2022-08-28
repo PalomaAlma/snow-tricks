@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick{% endblock %}
+{% block title %} | {{ trick.name }}{% endblock %}
 
 {% block main %}
     {% if user and trick.author is same as user %}
@@ -11,6 +11,7 @@
             {{ include('trick/_delete_form.html.twig') }}
         </div>
     {% endif %}
+
     <section id="up"
              class="banner"
              style="background-image: url('/images/{{ trick.banner }}');">
