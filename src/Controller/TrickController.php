@@ -6,6 +6,7 @@ use App\Entity\Media;
 use App\Entity\Message;
 use App\Entity\Trick;
 use App\Entity\Video;
+use App\Form\MessageType;
 use App\Form\TrickType;
 use App\Repository\MessageRepository;
 use App\Repository\TrickRepository;
@@ -114,28 +115,46 @@ class TrickController extends AbstractController
         $user = $this->getUser();
 
         $message = new Message();
-        $message->setCreateAt(new DateTimeImmutable('now'));
-        $message->setIsActive = true;
-        $message->setAuthor($user);
-        $message->setTrick($trick);
 
-        $messages = $messageRepository->findByTrick($trick);
-        $totalMessage = count($messages);
+//        $messages = $messageRepository->findByTrick($trick);
+
+        // Get the first page of orders
+        $paginatedResult = $messageRepository->getMessages($page, $trick);
+        // get the total number of orders
+        $totalMessage = count($paginatedResult);
+        $totalPage = ceil($totalMessage/5);
+
+        /*// Use the Paginator iterator
+        foreach ($paginatedResult as $message){
+            $message->doSomething();
+        }*/
+
+        /*$totalMessage = count($messages);
         $messagePerPage = 10;
         $nbPage = ceil($totalMessage / $messagePerPage);
         $offset = ($page - 1) * $messagePerPage;
-        $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);
+        $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);*/
 
-        if ($request->isMethod('POST')) {
-            $message->setContent($request->get('content'));
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $message->setCreateAt(new DateTimeImmutable('now'));
+            $message->setIsActive = true;
+            $message->setAuthor($user);
+            $message->setTrick($trick);
+
             $messageRepository->add($message);
         }
-        return $this->render('trick/show.html.twig', [
+        return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
             'user' => $user,
             'page' => $page,
-            'messages' => $messages,
-            'nbPages' => $nbPage
+            'messages' => $paginatedResult,
+            'totalMessage' => $totalMessage,
+            'totalPage' => $totalPage,
+            'form' => $form
         ]);
     }
 
