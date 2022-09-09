@@ -6,6 +6,7 @@ use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -58,6 +59,40 @@ class MessageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+    private function getMessageQueryBuilder($trick){
+        // Select the orders and their packages
+        $queryBuilder = $this->createQueryBuilder('m');
+
+        $queryBuilder->where('m.trick = :trick')
+            ->orderBy('m.createAt', 'DESC')
+            ->setParameter('trick', $trick);
+
+        //Return the QueryBuilder
+        return $queryBuilder;
+    }
+
+    /**
+     * Retrieve the list of active orders with all their actives packages
+     * @param $page
+     * @param $trick
+     * @return Paginator
+     */
+    public function getMessages($page, $trick){
+        $pageSize = 5;
+        $firstResult = ($page - 1) * $pageSize;
+
+        $queryBuilder = $this->getMessageQueryBuilder($trick);
+
+        // Set the returned page
+        $queryBuilder->setFirstResult($firstResult);
+        $queryBuilder->setMaxResults($pageSize);
+
+        // Generate the Query
+        $query = $queryBuilder->getQuery();
+
+        // Generate the Paginator
+        return new Paginator($query, true);
     }
 
     // /**

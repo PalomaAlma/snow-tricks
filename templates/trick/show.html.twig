@@ -180,17 +180,19 @@
     <hr>
 
     {% if user %}
-        <form class="container" method="post">
-            <label for="content" class="text-start my-4">Laisser un Commentaire</label>
-            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+        <div class="container">
+        {{ form_start(form) }}
+            <label for="content" class="text-start my-4">Envoyer un Commentaire en tant que {{ app.user.firstname }} {{ app.user.lastname }}</label>
+            {{ form_widget(form.content) }}
             <div class="w-100 text-end container my-4">
                 <button type="submit" class="btn btn-primary ms-auto">Envoyer</button>
             </div>
-        </form>
+        {{ form_end(form) }}
+        </div>
     {% endif %}
 
-    <ul class="list-group container">
-        {% for com in messages %}
+    <ul class="list-group container my-5">
+        {% for com in messages|sort((b, a) => a.createAt <=> b.createAt) %}
             <li class="list-group-item py-4">
                 <div class="fw-bold"> {{ com.author }}</div>
                 <p>{{ com.content }}</p>
@@ -199,23 +201,27 @@
             </li>
         {% endfor %}
     </ul>
-    {% if nbPages|length() > 1 %}
+    {% if messages|length() > 2 %}
         <nav aria-label="Page navigation" class="pagination">
             <ul class="pagination">
+                {% if page > 1 %}
                 <li class="page-item"><a class="page-link secondary-link"
                                          href="/trick/{{ trick.id }}/page{% if page is same as(1) %}{{ page }}{% else %}{{ page -1 }}{% endif %}"><</a>
                 </li>
+                {% endif %}
                 {% set k = 0 %}
-                {% for k in 0..nbPages| number_format(0, '.', ',') %}
-                    {% if k < nbPages %}
+                {% for k in 0..totalPage| number_format(0, '.', ',') %}
+                    {% if k < totalPage %}
                         {% set k=k+1 %}
                         <li class="page-item"><a class="page-link {% if k is same as(page) %}active{% endif %}"
                                                  href="/trick/{{ trick.id }}/page{{ k }}">{{ k }}</a></li>
                     {% endif %}
                 {% endfor %}
+                {% if page < totalPage %}
                 <li class="page-item"><a class="page-link secondary-link"
-                                         href="/trick/{{ trick.id }}/page{% if page > nbPages|length() %}{{ page }}{% else %}{{ page + 1 }}{% endif %}">></a>
+                                         href="/trick/{{ trick.id }}/page{% if page > totalPage|length() %}{{ page }}{% else %}{{ page + 1 }}{% endif %}">></a>
                 </li>
+                    {% endif %}
             </ul>
         </nav>
     {% endif %}
