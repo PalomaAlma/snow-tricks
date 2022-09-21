@@ -27,7 +27,7 @@ class TrickController extends AbstractController
      * @Route("/", name="homepage", methods={"GET"})
      * @Route("/page{page?1}", name="app_trick_index", methods={"GET"})
      */
-    public function index(TrickRepository $trickRepository, $page): Response
+    public function index(TrickRepository $trickRepository, int $page): Response
     {
         $user = $this->getUser();
         $tricks = $trickRepository;
@@ -110,7 +110,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/{id}/page{page}", name="app_trick_show", methods={"GET", "POST"})
      */
-    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository, $page): Response
+    public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository, int $page): Response
     {
         $messageRepository->findByTrick($trick);
         $user = $this->getUser();

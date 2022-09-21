@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\Trick;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -50,7 +51,7 @@ class MessageRepository extends ServiceEntityRepository
      * @return Message[] Returns an array of Trick objects
      */
 
-    public function findByPage(int $value, int $offset, $trick)
+    public function findByPage(int $value, int $offset, Trick $trick)
     {
         return $this->createQueryBuilder('m')
             ->where('m.trick = :trick')->setParameter('trick', $trick)
@@ -60,7 +61,7 @@ class MessageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-    private function getMessageQueryBuilder($trick){
+    private function getMessageQueryBuilder(Trick $trick){
         // Select the orders and their packages
         $queryBuilder = $this->createQueryBuilder('m');
 
@@ -78,7 +79,7 @@ class MessageRepository extends ServiceEntityRepository
      * @param $trick
      * @return Paginator
      */
-    public function getMessages(int $page, $trick){
+    public function getMessages(int $page, Trick $trick){
         $pageSize = 5;
         $firstResult = ($page - 1) * $pageSize;
 
