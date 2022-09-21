@@ -50,7 +50,7 @@ class TrickRepository extends ServiceEntityRepository
       * @return Trick[] Returns an array of Trick objects
       */
 
-    public function findByPage(int $value, int $offset)
+    public function findByPage(int $value, int $offset): array
     {
         return $this->createQueryBuilder('t')
             ->setMaxResults($value)

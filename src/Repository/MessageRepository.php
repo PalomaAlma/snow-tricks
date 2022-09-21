@@ -51,7 +51,7 @@ class MessageRepository extends ServiceEntityRepository
      * @return Message[] Returns an array of Trick objects
      */
 
-    public function findByPage(int $value, int $offset, Trick $trick)
+    public function findByPage(int $value, int $offset, Trick $trick): array
     {
         return $this->createQueryBuilder('m')
             ->where('m.trick = :trick')->setParameter('trick', $trick)
@@ -61,7 +61,8 @@ class MessageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-    private function getMessageQueryBuilder(Trick $trick){
+    private function getMessageQueryBuilder(Trick $trick): \Doctrine\ORM\QueryBuilder
+    {
         // Select the orders and their packages
         $queryBuilder = $this->createQueryBuilder('m');
 
@@ -75,11 +76,12 @@ class MessageRepository extends ServiceEntityRepository
 
     /**
      * Retrieve the list of active orders with all their actives packages
-     * @param $page
-     * @param $trick
+     * @param int $page
+     * @param Trick $trick
      * @return Paginator
      */
-    public function getMessages(int $page, Trick $trick){
+    public function getMessages(int $page, Trick $trick): Paginator
+    {
         $pageSize = 5;
         $firstResult = ($page - 1) * $pageSize;
 
