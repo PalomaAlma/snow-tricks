@@ -97,6 +97,7 @@ class TrickController extends AbstractController
             $trick->setUpdatedAt($now);
 
             $trickRepository->add($trick);
+            $this->addFlash('success', 'Votre Trick a bien été ajouté.');
             return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
@@ -116,24 +117,11 @@ class TrickController extends AbstractController
 
         $message = new Message();
 
-//        $messages = $messageRepository->findByTrick($trick);
-
         // Get the first page of orders
         $paginatedResult = $messageRepository->getMessages($page, $trick);
         // get the total number of orders
         $totalMessage = count($paginatedResult);
         $totalPage = ceil($totalMessage/5);
-
-        /*// Use the Paginator iterator
-        foreach ($paginatedResult as $message){
-            $message->doSomething();
-        }*/
-
-        /*$totalMessage = count($messages);
-        $messagePerPage = 10;
-        $nbPage = ceil($totalMessage / $messagePerPage);
-        $offset = ($page - 1) * $messagePerPage;
-        $messages = $messageRepository->findByPage($messagePerPage, $offset, $trick);*/
 
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
@@ -146,6 +134,7 @@ class TrickController extends AbstractController
             $message->setTrick($trick);
 
             $messageRepository->add($message);
+            $this->addFlash('success', 'Votre commentaire à bien été posté');
         }
         return $this->renderForm('trick/show.html.twig', [
             'trick' => $trick,
@@ -203,6 +192,7 @@ class TrickController extends AbstractController
             }
             $trick->setUpdatedAt(new DateTimeImmutable('now'));
             $trickRepository->add($trick);
+            $this->addFlash('success', 'Votre Trick a bien été mis à jour.');
             return $this->redirectToRoute('app_trick_index', ['page' => 1], Response::HTTP_SEE_OTHER);
         }
 
@@ -222,6 +212,7 @@ class TrickController extends AbstractController
         {
             if ($this->isCsrfTokenValid($delete.$trick->getId(), $request->request->get('_token'))) {
                 $trickRepository->remove($trick);
+                $this->addFlash('success', 'Votre Trick a bien été supprimé.');
             }
         }
 
