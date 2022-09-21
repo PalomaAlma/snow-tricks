@@ -50,7 +50,7 @@ class MessageRepository extends ServiceEntityRepository
      * @return Message[] Returns an array of Trick objects
      */
 
-    public function findByPage($value, $offset, $trick)
+    public function findByPage(int $value, int $offset, $trick)
     {
         return $this->createQueryBuilder('m')
             ->where('m.trick = :trick')->setParameter('trick', $trick)
@@ -78,7 +78,7 @@ class MessageRepository extends ServiceEntityRepository
      * @param $trick
      * @return Paginator
      */
-    public function getMessages($page, $trick){
+    public function getMessages(int $page, $trick){
         $pageSize = 5;
         $firstResult = ($page - 1) * $pageSize;
 
