@@ -3,6 +3,11 @@
 {% block title %} | {{ trick.name }}{% endblock %}
 
 {% block main %}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
     {% if user and trick.author is same as user %}
         <div class="fixed-top d-flex justify-content-end align-items-center mt-5 languette">
             <a href="{{ path('app_trick_edit', {'id': trick.id}) }}" class="text-warning deledit fs-3"><i

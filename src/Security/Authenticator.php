@@ -30,10 +30,6 @@ class Authenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        if ($this->getUser())
-        {
-            return $this->redirectToRoute('app_trick_index');
-        }
         $email = $request->request->get('email', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);

@@ -3,6 +3,12 @@
 {% block title %}{% endblock %}
 
 {% block main %}
+{% block main %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <main class="">
         <section id="up" class="banner my-4" style="background:url(/images/pexels-leroy-filon-311065.jpg);">
             <div class=" text-center">
