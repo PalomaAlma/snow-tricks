@@ -108,7 +108,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/page{page}", name="app_trick_show", methods={"GET", "POST"})
+     * @Route("/{slug}_{id}/page{page}", name="app_trick_show", methods={"GET", "POST"})
      */
     public function show(Trick $trick, MessageRepository $messageRepository, Request $request, UserRepository $userRepository, int $page): Response
     {
