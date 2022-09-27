@@ -19,4 +19,4 @@ Lancer les commandes suivantes après avoir cloné le projet sur votre machine
 puis
 ```php/bin console doctrine:migrations:migrate```
 
-### [Lien SymfonyInsight]()
+[![SymfonyInsight](https://insight.symfony.com/projects/5782275b-bc84-4610-b00a-6dd47f4c4044/mini.svg)](https://insight.symfony.com/projects/5782275b-bc84-4610-b00a-6dd47f4c4044)
