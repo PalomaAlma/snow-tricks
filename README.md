@@ -5,8 +5,7 @@ Projet de formation consistant à développer une plateforme collaborative de pa
 ## Prérequis et installation
 - PHP 7.4
 - MySQL 5.7
-- Composer
-- Symfony 6
+- Composer 2+
 
 
 Lancer les commandes suivantes après avoir cloné le projet sur votre machine
