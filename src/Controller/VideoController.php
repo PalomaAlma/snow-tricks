@@ -75,9 +75,9 @@ class VideoController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_video_delete", methods={"POST"})
+     * @Route("/{id}/{slug}", name="app_video_delete", methods={"POST"})
      */
-    public function delete(Request $request, Video $video, VideoRepository $videoRepository): Response
+    public function delete(Request $request, Video $video, VideoRepository $videoRepository, $slug): Response
     {
         $delete = 'delete';
         $trick = $video->getTrick()->getId();
@@ -85,6 +85,6 @@ class VideoController extends AbstractController
             $videoRepository->remove($video);
         }
 
-        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1, 'slug' => $slug], Response::HTTP_SEE_OTHER);
     }
 }
