@@ -32,7 +32,7 @@ class TrickType extends AbstractType
                 'required' => false
             ])
             ->add('videos', TextareaType::class, [
-                'help' => 'Récupérer la balise "intégrer" sur Youtube ou Dailymotion et insérer les en les séparant une virgule',
+                'help' => 'Pour insérer une vidéo via Youtube, cliquez sur "partager" et insérer les liens ici par une virgule. Seulement vos 3 premières vidéos seront affichées',
                 'mapped' => false,
                 'required' => false
             ])

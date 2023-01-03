@@ -29,6 +29,7 @@
         </div>
     </section>
     <section class="text-center my-4 mx-4" id="down">
+
         <div class="d-xl-flex justify-content-between d-none">
             <div id="carouselMedia">
                 <p>Cliquez sur chaque image pour la faire défiler</p>
@@ -51,7 +52,7 @@
             <ul class="d-flex justify-content-evenly list-unstyled">
                 {% for video in trick.videos|slice(0,3) %}
                     <li class="list-inline-item">
-                        {{ video.url|raw }}
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         {% if user and trick.author is same as user %}
                             <div class="d-flex justify-content-end align-items-center">
                                 {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
@@ -61,22 +62,6 @@
                         {% endif %}</li>
                 {% endfor %}
             </ul>
-            {#<div id="carouselVideo">
-                {% set i = 0 %}
-                {% for video in trick.videos %}
-                    <div class="{% if i == 0 %}selected{% elseif i == 1 %}next{% elseif i == 2 %}nextRightSecond{% elseif i == 3 %}hideRight{% endif %}">
-                        {{ video.url|raw }}
-                        {% if user and trick.author is same as user %}
-                            <div class="d-flex justify-content-end align-items-center">
-                                #}{#                        <a href="{{ path('app_media_edit', {'id': media.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}{#
-
-                                {{ include('video/_delete_form.html.twig') }}
-                            </div>
-                        {% endif %}</div>
-                    {% set i = i+1 %}
-                {% endfor %}
-
-            </div>#}
         </div>
 
         <ul class="d-none justify-content-between d-none list-unstyled">
@@ -99,8 +84,7 @@
             <li>
                 <ul class="d-flex justify-content-evenly list-unstyled">
                     {% for video in trick.videos %}
-                        <li class="list-inline-item">
-                            {{ video.url|raw }}
+                        <li class="list-inline-item"><video src="https://youtu.be/wDjeBNv6ip0" controls width="480"></video>
                             {% if user and trick.author is same as user %}
                                 <div class="d-flex justify-content-end align-items-center">
                                     {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}
@@ -148,7 +132,7 @@
                                 <ul class="list-unstyled">
                                     {% for video in trick.videos %}
                                         <li class="my-4">
-                                            {{ video.url|raw }}
+                                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             {% if user and trick.author is same as user %}
                                                 <div class="d-flex justify-content-end align-items-center">
                                                     {#                            <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="text-warning deledit"><i class="bi bi-pencil"></i></a> #}

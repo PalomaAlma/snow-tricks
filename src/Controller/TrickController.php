@@ -88,8 +88,12 @@ class TrickController extends AbstractController
             {
                 foreach (explode(',', $form->get('videos')->getData()) as $videoUrl)
                 {
+                    // Récupère la dernière chaîne de caractère du lien Youtube
+                    $array = explode('/', $videoUrl);
+                    $videoCode = array_pop($array);
+
                     $video = new Video();
-                    $video->setUrl($videoUrl);
+                    $video->setUrl($videoCode);
                     $video->setTrick($trick);
                     $videoRepository->add($video);
                 }
@@ -189,8 +193,12 @@ class TrickController extends AbstractController
             {
                 foreach (explode(',', $form->get('videos')->getData()) as $videoUrl)
                 {
+                    // Récupère la dernière chaîne de caractère du lien Youtube
+                    $array = explode('/', $videoUrl);
+                    $videoCode = array_pop($array);
+
                     $video = new Video();
-                    $video->setUrl($videoUrl);
+                    $video->setUrl($videoCode);
                     $video->setTrick($trick);
                     $videoRepository->add($video);
                 }
