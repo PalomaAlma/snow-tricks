@@ -77,7 +77,7 @@ class VideoController extends AbstractController
     /**
      * @Route("/{id}/{slug}", name="app_video_delete", methods={"POST"})
      */
-    public function delete(Request $request, Video $video, VideoRepository $videoRepository, $slug): Response
+    public function delete(Request $request, Video $video, VideoRepository $videoRepository, string $slug): Response
     {
         $delete = 'delete';
         $trick = $video->getTrick()->getId();

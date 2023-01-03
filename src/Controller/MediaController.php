@@ -77,7 +77,7 @@ class MediaController extends AbstractController
     /**
      * @Route("/{id}/{slug}", name="app_media_delete", methods={"POST"})
      */
-    public function delete(Request $request, Media $medium, MediaRepository $mediaRepository, $slug): Response
+    public function delete(Request $request, Media $medium, MediaRepository $mediaRepository, string $slug): Response
     {
         $delete = 'delete';
         $trick = $medium->getTrick()->getId();
