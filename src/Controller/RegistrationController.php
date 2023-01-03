@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/verify/email", name="app_verify_email", methods={"GET"})
      */
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {

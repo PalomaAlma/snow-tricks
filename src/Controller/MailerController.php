@@ -14,7 +14,7 @@ class MailerController extends AbstractController
      * @param MailerInterface $mailer
      * @return Response
      * @throws TransportExceptionInterface
-     * @Route("/mailer")
+     * @Route("/mailer", methods={"GET"})
      */
     public function sendEmail(MailerInterface $mailer): Response
     {
