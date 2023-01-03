@@ -75,9 +75,9 @@ class MediaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_media_delete", methods={"POST"})
+     * @Route("/{id}/{slug}", name="app_media_delete", methods={"POST"})
      */
-    public function delete(Request $request, Media $medium, MediaRepository $mediaRepository): Response
+    public function delete(Request $request, Media $medium, MediaRepository $mediaRepository, string $slug): Response
     {
         $delete = 'delete';
         $trick = $medium->getTrick()->getId();
@@ -85,6 +85,6 @@ class MediaController extends AbstractController
             $mediaRepository->remove($medium);
         }
 
-        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['id' => $trick, 'page' => 1, 'slug' => $slug], Response::HTTP_SEE_OTHER);
     }
 }
